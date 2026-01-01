@@ -34,26 +34,26 @@ jobs:
       # Step 5: Run Tests
       - name: Run Tests
         run: npm test -- --watch=false --browsers=ChromeHeadless
-        
-deploy:
-    needs: build-and-test
-    runs-on: ubuntu-latest
 
-    permissions:
-      contents: write
+  deploy:
+      needs: build-and-test
+      runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
+      permissions:
+        contents: write
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
+      steps:
+        - uses: actions/checkout@v4
 
-      - run: npm install
-      - run: npm run build -- --configuration=production
+        - uses: actions/setup-node@v4
+          with:
+            node-version: 18
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist/my-angular17-project
+        - run: npm install
+        - run: npm run build -- --configuration=production
+
+        - name: Deploy to GitHub Pages
+          uses: peaceiris/actions-gh-pages@v4
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: dist/my-angular17-project
