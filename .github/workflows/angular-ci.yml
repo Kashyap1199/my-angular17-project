@@ -41,29 +41,29 @@ jobs:
         run: npm test -- --watch=false --browsers=ChromeHeadless
 
   deploy:
-      needs: build-and-test
-      runs-on: ubuntu-latest
+    needs: build-and-test
+    runs-on: ubuntu-latest
 
-      permissions:
-        contents: read
-        pages: write
-        id-token: write
-	
-      environment:
-        name: github-pages
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
 
-      steps:
-        - uses: actions/checkout@v4
+    environment:
+      name: github-pages
 
-        - uses: actions/setup-node@v4
-          with:
-            node-version: 18
+    steps:
+      - uses: actions/checkout@v4
 
-        - run: npm install
-        - run: npm run build -- --configuration=production
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
 
-        - name: Deploy to GitHub Pages
-          uses: peaceiris/actions-gh-pages@v4
-          with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_dir: dist/my-angular17-project
+      - run: npm install
+      - run: npm run build -- --configuration=production
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist/my-angular17-project
