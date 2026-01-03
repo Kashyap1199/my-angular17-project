@@ -29,7 +29,7 @@ jobs:
 
       # Step 4: Build Angular Project
       - name: Build Angular App
-        run: npm run build --configuration=production --base-href=/my-angular17-project/
+        run: npm run build -- --configuration=production --base-href=/my-angular17-project/ --deploy-url=/my-angular17-project/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
@@ -60,10 +60,11 @@ jobs:
           node-version: 18
 
       - run: npm install
-      - run: npm run build -- --configuration=production
+      - run: npm run build -- --configuration=production --base-href=/my-angular17-project/ --deploy-url=/my-angular17-project/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: dist/my-angular17-project
+          publish_branch: gh-pages
