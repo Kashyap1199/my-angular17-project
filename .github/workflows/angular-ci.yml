@@ -29,7 +29,7 @@ jobs:
 
       # Step 4: Build Angular Project
       - name: Build Angular App
-        run: npm run build -- --configuration=production
+        run: ng build --configuration=production --base-href=/my-angular17-project/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
